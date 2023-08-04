@@ -3,6 +3,7 @@ from flask_cors import CORS,cross_origin
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen as uReq
+import pandas
 import logging
 logging.basicConfig(filename='scraper.log',level=logging.INFO)
 application = Flask(__name__)
@@ -63,6 +64,8 @@ def index():
                 my_dict = {"Product": search_string, "Customer_name": name, "Rating": rating, "Comment_heading": commentHead,
                           "Comment": customer_Comment}
                 reviews.append(my_dict)
+                df_reviews = pandas.DataFrame(reviews)
+                df_reviews.to_csv('flipkart.csv',index=False)
             return render_template('results.html', reviews=reviews[0:(len(reviews)-1)])
         except Exception as e:
             logging.info(e)
