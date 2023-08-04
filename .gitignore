@@ -124,6 +124,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+web_scraper/
 ENV/
 env.bak/
 venv.bak/
